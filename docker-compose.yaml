@@ -1,0 +1,17 @@
+version: "3.1"
+
+services:
+  db:
+    image: mysql:8.0
+
+    environment:
+      MYSQL_ROOT_PASSWORD: teste
+      MYSQL_DATABASE: bank
+      MYSQL_USERNAME: lu
+      MYSQL_PASSWORD: 123456
+
+  lumen:
+    build: .
+    image: bank:0.1
+    ports:
+      - 8000:8000

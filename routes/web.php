@@ -18,20 +18,7 @@ $router->get('/', function () use ($router) {
 });
 
 $router->group(['prefix' => 'api'], function() use ($router){
-    $router->group(['prefix' => 'accounts'], function() use ($router){
-        $router->get('','AccountController@index');
-        $router->get('{id}','AccountController@show');
-        $router->post('','AccountController@store');
-        $router->post('','AccountController@sacar');
-
-        $router->get('{transactionId}/trasactions','TransactionsController@searchBySeries');
-    });
-    $router->group(['prefix' => 'transactions'], function() use ($router){
-        $router->get('','TransactionController@index');
-    });
+    $router->post('withdraw','TransactionController@withdraw');
+    $router->post('balance','TransactionController@balance');    
+    
 });
-
-$router->post('api/login','TokenController@generateToken');
-$router->post('api/transfer','AccountController@transfer');
-$router->post('api/withdraw','AccountController@withdraw');
-$router->post('api/deposit','AccountController@deposit');
