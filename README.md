@@ -1,24 +1,71 @@
-# Lumen PHP Framework
+# Bank API
 
-[![Build Status](https://travis-ci.org/laravel/lumen-framework.svg)](https://travis-ci.org/laravel/lumen-framework)
-[![Total Downloads](https://img.shields.io/packagist/dt/laravel/framework)](https://packagist.org/packages/laravel/lumen-framework)
-[![Latest Stable Version](https://img.shields.io/packagist/v/laravel/framework)](https://packagist.org/packages/laravel/lumen-framework)
-[![License](https://img.shields.io/packagist/l/laravel/framework)](https://packagist.org/packages/laravel/lumen-framework)
+Aplicação de exemplo de API para operações bancárias criada com framework 
+[Laravel Lumen](https://lumen.laravel.com).
 
-Laravel Lumen is a stunningly fast PHP micro-framework for building web applications with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Lumen attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as routing, database abstraction, queueing, and caching.
+# O que este projeto contém?
 
-## Official Documentation
+Além do framework Lumen para a funcionalidade em si, a base de código da 
+aplicação é empacotada como imagem Docker.  E para ambiente de desenvolvimento,
+utiliza o Docker Compose para facilitar a execução dos containers.
 
-Documentation for the framework can be found on the [Lumen website](https://lumen.laravel.com/docs).
+# Pré-requisitos
 
-## Contributing
+* [PHP Composer instalado](https://getcomposer.org/download)
+* [Docker instalado](https://docs.docker.com/get-docker/)
+* [Docker Compose instalado](https://docs.docker.com/compose/install/)
 
-Thank you for considering contributing to Lumen! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+# Como executar este projeto?
 
-## Security Vulnerabilities
+_(Nos trechos abaixo, o projeto está no diretório `/home/user/bank`)_
+```
+$ git clone git@github.com/lourdilene/bank
+$ cd bank
+```
 
-If you discover a security vulnerability within Lumen, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
+## Atualizar dependências do projeto:
+```
+$ composer update
+```
 
-## License
+Saída esperada:
+```
+Loading composer repositories with package information
+Updating dependencies
+Nothing to modify in lock file
+Installing dependencies from lock file (including require-dev)
+Nothing to install, update or remove
+Package sebastian/resource-operations is abandoned, you should avoid using it. No replacement was suggested.
+Generating optimized autoload files
+62 packages you are using are looking for funding.
+Use the `composer fund` command to find out more!
+```
 
-The Lumen framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## Executar projeto:
+```
+$ docker-compose up --build
+```
+
+Saída esperada:
+```
+Building app
+[truncated]
+app_1  | [Mon Aug  2 22:02:10 2021] PHP 7.4.22 Development Server (http://0.0.0.0:8000) started
+```
+
+## Testar o projeto:
+Abra um outro terminal e execute:
+```
+$ curl --request POST 'http://localhost:8000/api/withdraw' \
+     --header 'Content-Type: application/json' \
+     --data-raw '
+{
+    "accountNumber": 1221,
+    "amount": 1
+}'
+```
+
+Saída esperada:
+```
+{"data":{"withdraw":{"id":1,"number":"1221","balance":10}}}
+```
