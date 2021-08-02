@@ -2,16 +2,14 @@ version: "3.1"
 
 services:
   db:
-    image: mysql:8.0
+    image: mysql:5.7
 
     environment:
       MYSQL_ROOT_PASSWORD: teste
       MYSQL_DATABASE: bank
       MYSQL_USERNAME: lu
       MYSQL_PASSWORD: 123456
-
-  lumen:
-    build: .
-    image: bank:0.1
     ports:
-      - 8000:8000
+      - 3307:3306
+    volumes:
+      - "./bank.sql:/docker-entrypoint-initdb.d/bank.sql"
