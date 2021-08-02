@@ -12,14 +12,14 @@ class TransactionController extends Controller
 {
     public function withdraw(Request $request)
     {
-        $account = Account::find($request->accountNumber);
+        $account = Account::where('number', '=', $request->accountNumber)->firstOrFail();
         $transaction = new Withdraw();
         return $transaction->executeTransaction($account, $request->amount);
     }
 
     public function deposit(Request $request)
     {
-        $account = Account::find($request->accountNumber);
+        $account = Account::where('number', '=', $request->accountNumber)->firstOrFail();
         $transaction = new Deposit();
         return $transaction->executeTransaction($account, $request->amount);
     }
