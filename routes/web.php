@@ -19,6 +19,7 @@ $router->get('/', function () use ($router) {
 
 $router->group(['prefix' => 'api'], function() use ($router){
     $router->post('withdraw','TransactionController@withdraw');
-    $router->post('balance','TransactionController@balance');    
-    
+    $router->post('deposit','TransactionController@deposit');
+    $router->post('balance','TransactionController@balance');
+
 });
