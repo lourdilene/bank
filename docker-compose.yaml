@@ -10,6 +10,12 @@ services:
       MYSQL_USERNAME: lu
       MYSQL_PASSWORD: 123456
     ports:
-      - 3307:3306
+      - 3306:3306
     volumes:
       - "./bank.sql:/docker-entrypoint-initdb.d/bank.sql"
+
+  app-lumen:
+    image: bank:0.1
+    build: .
+    ports:
+      - 8000:8000
