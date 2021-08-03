@@ -15,7 +15,7 @@ class AccountSeeder extends Seeder
     public function run()
     {
         Account::create([
-            'number' => '1212',
+            'number' => '3434',
             'balance' => '100.00'
         ]);
     }
